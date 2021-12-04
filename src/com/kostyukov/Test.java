@@ -15,66 +15,67 @@ public class Test
 //		SetUnicodeOn();
 		ClrScr();
 		
-		MarsRover mRover = new MarsRover(new MarsMap(6, 6), CardinalPoints.N);
+		MarsMap map = new MarsMap(6, 6);
 		
-		mRover.getMap().PrintMap();
+		MarsRover mRover = new MarsRover(map, CardinalPoints.N);
+		
+		map.PrintMap();
 		Thread.sleep(1000);
 		ClrScr();
 		
 		mRover.Move(MoveDirection.FORWARDS);
-		mRover.getMap().PrintMap();
+		map.PrintMap();
 		Thread.sleep(1000);
 		ClrScr();
 		
 		mRover.Turn(TurnDirection.RIGHT);
-		mRover.getMap().PrintMap();
+		map.PrintMap();
 		Thread.sleep(1000);
 		ClrScr();
 		
 		mRover.Move(MoveDirection.FORWARDS);
-		mRover.getMap().PrintMap();
+		map.PrintMap();
 		Thread.sleep(1000);
 		ClrScr();
 		
 		mRover.Move(MoveDirection.FORWARDS);
-		mRover.getMap().PrintMap();
+		map.PrintMap();
 		Thread.sleep(1000);
 		ClrScr();
 		
 		mRover.Turn(TurnDirection.RIGHT);
-		mRover.getMap().PrintMap();
+		map.PrintMap();
 		Thread.sleep(1000);
 		ClrScr();
 		
 		mRover.Move(MoveDirection.FORWARDS);
-		mRover.getMap().PrintMap();
+		map.PrintMap();
 		Thread.sleep(1000);
 		ClrScr();
 		
 		mRover.Turn(TurnDirection.LEFT);
-		mRover.getMap().PrintMap();
+		map.PrintMap();
 		Thread.sleep(1000);
 		ClrScr();
 		
 		mRover.Move(MoveDirection.FORWARDS);
-		mRover.getMap().PrintMap();
+		map.PrintMap();
 		Thread.sleep(1000);
 		ClrScr();
 		
 		mRover.Turn(TurnDirection.LEFT);
-		mRover.getMap().PrintMap();
+		map.PrintMap();
 		Thread.sleep(1000);
 		ClrScr();
 		
 		mRover.Move(MoveDirection.BACKWARDS);
-		mRover.getMap().PrintMap();
+		map.PrintMap();
 		Thread.sleep(1000);
 		ClrScr();
 		
 		mRover.Move(MoveDirection.BACKWARDS);
-		mRover.getMap().PrintMap();
+		map.PrintMap();
 		Thread.sleep(1000);
-		ClrScr();
 	}
 	
 	static void ClrScr()

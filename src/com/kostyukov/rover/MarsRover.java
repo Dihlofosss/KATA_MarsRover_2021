@@ -7,7 +7,7 @@ import com.kostyukov.map.MarsMap;
 public class MarsRover implements Rover
 {
 	private MapTile currentPosition;
-	private MarsMap map;
+	private final MarsMap map;
 	
 	private CardinalPoints currentDirection;
 	
@@ -36,7 +36,7 @@ public class MarsRover implements Rover
 		
 		if (newPosition.getObjectOnTheTile() != null)
 		{
-			System.out.println("Obstacle head, can't move there.");
+			System.out.println("Obstacle ahead, can't move there.");
 			return;
 		}
 		
@@ -54,16 +54,6 @@ public class MarsRover implements Rover
 			case RIGHT -> currentDirection = currentDirection.nextPoint();
 			default -> System.out.println("Wrong command");
 		}
-	}
-	
-	public CardinalPoints getCurrentDirection()
-	{
-		return currentDirection;
-	}
-	
-	public MarsMap getMap()
-	{
-		return map;
 	}
 	
 	@Override
