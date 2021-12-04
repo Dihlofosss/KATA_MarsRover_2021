@@ -4,24 +4,13 @@ import com.kostyukov.map.CardinalPoints;
 import com.kostyukov.map.MapTile;
 import com.kostyukov.map.MarsMap;
 
-public class MarsRover implements Rover
+public class MarsRover extends Rover
 {
-	private MapTile currentPosition;
-	private final MarsMap map;
-	
-	private CardinalPoints currentDirection;
 	
 	public MarsRover(MarsMap map, CardinalPoints direction)
 	{
 		currentDirection = direction;
-		this.map = map;
-		landMe(this.map);
-	}
-	
-	private void landMe(MarsMap map)
-	{
-		currentPosition = map.getFirstFreeTile();
-		currentPosition.setObjectOnTheTile(this);
+		LandThisRover(map);
 	}
 	
 	@Override
@@ -43,17 +32,6 @@ public class MarsRover implements Rover
 		newPosition.setObjectOnTheTile(this);
 		currentPosition.setObjectOnTheTile(null);
 		currentPosition = newPosition;
-	}
-	
-	@Override
-	public void Turn(TurnDirection direction)
-	{
-		switch (direction)
-		{
-			case LEFT -> currentDirection = currentDirection.previousPoint();
-			case RIGHT -> currentDirection = currentDirection.nextPoint();
-			default -> System.out.println("Wrong command");
-		}
 	}
 	
 	@Override

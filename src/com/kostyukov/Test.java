@@ -4,6 +4,7 @@ import com.kostyukov.map.CardinalPoints;
 import com.kostyukov.map.MarsMap;
 import com.kostyukov.rover.MarsRover;
 import com.kostyukov.rover.MoveDirection;
+import com.kostyukov.rover.Rover;
 import com.kostyukov.rover.TurnDirection;
 
 import java.io.IOException;
@@ -17,7 +18,7 @@ public class Test
 		
 		MarsMap map = new MarsMap(6, 6);
 		
-		MarsRover mRover = new MarsRover(map, CardinalPoints.N);
+		Rover mRover = new MarsRover(map, CardinalPoints.N);
 		
 		map.PrintMap();
 		Thread.sleep(1000);

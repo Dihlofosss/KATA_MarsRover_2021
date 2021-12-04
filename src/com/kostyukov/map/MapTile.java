@@ -5,7 +5,6 @@ import java.util.TreeMap;
 
 public class MapTile
 {
-//	private MapTile mapTileN, mapTileE, mapTileS, mapTileW;
 	
 	private final Map<CardinalPoints, MapTile> linkedTiles = new TreeMap<>();
 	
