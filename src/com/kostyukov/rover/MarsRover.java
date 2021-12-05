@@ -2,12 +2,12 @@ package com.kostyukov.rover;
 
 import com.kostyukov.map.CardinalPoints;
 import com.kostyukov.map.MapTile;
-import com.kostyukov.map.MarsMap;
+import com.kostyukov.map.WorldMap;
 
 public class MarsRover extends Rover
 {
 	
-	public MarsRover(MarsMap map, CardinalPoints direction)
+	public MarsRover(WorldMap map, CardinalPoints direction)
 	{
 		currentDirection = direction;
 		LandThisRover(map);
@@ -25,7 +25,7 @@ public class MarsRover extends Rover
 		
 		if (newPosition.getObjectOnTheTile() != null)
 		{
-			System.out.println("Obstacle ahead, can't move there.");
+			System.out.println("You ask me to move " + direction + ", but there is an obstacle. Can't move there.");
 			return;
 		}
 		
@@ -38,14 +38,15 @@ public class MarsRover extends Rover
 	public String toString()
 	{
 		String roverSign;
+		System.out.print("\u001B[32m");
 		switch (currentDirection)
 		{
 			case N -> roverSign = "\u25B2";
 			case E -> roverSign = "\u25B6";
 			case S -> roverSign = "\u25BC";
 			case W -> roverSign = "\u25C0";
-			default -> roverSign = "Have no idea why but Rover direction is not set";
+			default -> roverSign = "Have no idea why but Rover's direction is not set";
 		}
-		return roverSign;
+		return roverSign + "\u001B[0m";
 	}
 }

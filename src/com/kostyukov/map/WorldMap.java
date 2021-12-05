@@ -2,10 +2,10 @@ package com.kostyukov.map;
 
 import java.util.Random;
 
-public class MarsMap
+public class WorldMap
 {
 	private final MapTile[][] tiles;
-	public MarsMap(int sizeX, int sizeY)
+	public WorldMap(int sizeX, int sizeY)
 	{
 		tiles = new MapTile[sizeX][sizeY];
 		

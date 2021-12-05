@@ -2,7 +2,7 @@ package com.kostyukov.rover;
 
 import com.kostyukov.map.CardinalPoints;
 import com.kostyukov.map.MapTile;
-import com.kostyukov.map.MarsMap;
+import com.kostyukov.map.WorldMap;
 
 public abstract class Rover
 {
@@ -21,7 +21,7 @@ public abstract class Rover
 		}
 	}
 	
-	public void LandThisRover(MarsMap map)
+	public void LandThisRover(WorldMap map)
 	{
 		currentPosition = map.getFirstFreeTile();
 		currentPosition.setObjectOnTheTile(this);

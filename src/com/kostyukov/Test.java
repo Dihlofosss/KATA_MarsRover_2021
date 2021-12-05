@@ -1,7 +1,7 @@
 package com.kostyukov;
 
 import com.kostyukov.map.CardinalPoints;
-import com.kostyukov.map.MarsMap;
+import com.kostyukov.map.WorldMap;
 import com.kostyukov.rover.MarsRover;
 import com.kostyukov.rover.MoveDirection;
 import com.kostyukov.rover.Rover;
@@ -16,66 +16,66 @@ public class Test
 //		SetUnicodeOn();
 		ClrScr();
 		
-		MarsMap map = new MarsMap(6, 6);
+		WorldMap marsMap = new WorldMap(6, 6);
 		
-		Rover mRover = new MarsRover(map, CardinalPoints.N);
+		Rover mRover = new MarsRover(marsMap, CardinalPoints.N);
 		
-		map.PrintMap();
+		marsMap.PrintMap();
 		Thread.sleep(1000);
 		ClrScr();
 		
 		mRover.Move(MoveDirection.FORWARDS);
-		map.PrintMap();
+		marsMap.PrintMap();
 		Thread.sleep(1000);
 		ClrScr();
 		
 		mRover.Turn(TurnDirection.RIGHT);
-		map.PrintMap();
+		marsMap.PrintMap();
 		Thread.sleep(1000);
 		ClrScr();
 		
 		mRover.Move(MoveDirection.FORWARDS);
-		map.PrintMap();
+		marsMap.PrintMap();
 		Thread.sleep(1000);
 		ClrScr();
 		
 		mRover.Move(MoveDirection.FORWARDS);
-		map.PrintMap();
+		marsMap.PrintMap();
 		Thread.sleep(1000);
 		ClrScr();
 		
 		mRover.Turn(TurnDirection.RIGHT);
-		map.PrintMap();
+		marsMap.PrintMap();
 		Thread.sleep(1000);
 		ClrScr();
 		
 		mRover.Move(MoveDirection.FORWARDS);
-		map.PrintMap();
+		marsMap.PrintMap();
 		Thread.sleep(1000);
 		ClrScr();
 		
 		mRover.Turn(TurnDirection.LEFT);
-		map.PrintMap();
+		marsMap.PrintMap();
 		Thread.sleep(1000);
 		ClrScr();
 		
 		mRover.Move(MoveDirection.FORWARDS);
-		map.PrintMap();
+		marsMap.PrintMap();
 		Thread.sleep(1000);
 		ClrScr();
 		
 		mRover.Turn(TurnDirection.LEFT);
-		map.PrintMap();
+		marsMap.PrintMap();
 		Thread.sleep(1000);
 		ClrScr();
 		
 		mRover.Move(MoveDirection.BACKWARDS);
-		map.PrintMap();
+		marsMap.PrintMap();
 		Thread.sleep(1000);
 		ClrScr();
 		
 		mRover.Move(MoveDirection.BACKWARDS);
-		map.PrintMap();
+		marsMap.PrintMap();
 		Thread.sleep(1000);
 	}
 	
