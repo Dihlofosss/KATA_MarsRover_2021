@@ -18,7 +18,7 @@ public class MapTile
 		this.objectOnTheTile = objectOnTheTile;
 	}
 	
-	public void interractWithObject()
+	public void interactWithObject()
 	{
 		if (objectOnTheTile == null)
 		{

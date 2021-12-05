@@ -14,6 +14,8 @@ public class ControlCenter
 	{
 		this.map = map;
 		this.rover = rover;
+		
+		this.map.PrintMap();
 	}
 	
 	private boolean DecodeCommand(@NotNull String s)
@@ -50,6 +52,16 @@ public class ControlCenter
 					rover.Turn((TurnDirection) roverCommand);
 				else if (roverCommand instanceof CustomCommands)
 					rover.interact();
+			}
+			
+			map.PrintMap();
+			try
+			{
+				Thread.sleep(1000);
+			}
+			catch (InterruptedException e)
+			{
+				e.printStackTrace();
 			}
 		}
 	}

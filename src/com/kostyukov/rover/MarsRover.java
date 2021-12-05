@@ -15,7 +15,7 @@ public class MarsRover extends Rover
 	@Override
 	public void interact()
 	{
-		currentPosition.getMapTile(currentDirection).interractWithObject();
+		currentPosition.getMapTile(currentDirection).interactWithObject();
 	}
 	
 	@Override
