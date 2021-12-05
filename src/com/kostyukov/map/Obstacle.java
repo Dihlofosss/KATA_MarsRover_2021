@@ -2,9 +2,28 @@ package com.kostyukov.map;
 
 public class Obstacle
 {
-	char obstacleType;
+	public enum obstacleType
+	{
+		ROCK("\u0394"),
+		HOLE("\u039F");
+		
+		private String icon;
+		
+		obstacleType(String icon)
+		{
+			this.icon = icon;
+		}
+		
+		@Override
+		public String toString()
+		{
+			return icon;
+		}
+	}
 	
-	public Obstacle(char obstacleType)
+	private obstacleType obstacleType;
+	
+	public Obstacle(obstacleType obstacleType)
 	{
 		this.obstacleType = obstacleType;
 	}
@@ -12,6 +31,6 @@ public class Obstacle
 	@Override
 	public String toString()
 	{
-		return "" + obstacleType;
+		return obstacleType.toString();
 	}
 }
