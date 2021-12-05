@@ -17,11 +17,11 @@ public class WorldMap
 				int rnd = new Random().nextInt(20);
 				if (rnd <= 2)
 				{
-					char obstacleType;
+					Obstacle.obstacleType obstacleType;
 					if (rnd == 1)
-						obstacleType = '\u039F';
+						obstacleType = Obstacle.obstacleType.HOLE;
 					else
-						obstacleType = '\u0394';
+						obstacleType = Obstacle.obstacleType.ROCK;
 					tiles[x][y].setObjectOnTheTile(new Obstacle(obstacleType));
 				}
 			}
