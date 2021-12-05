@@ -6,11 +6,16 @@ import com.kostyukov.map.WorldMap;
 
 public class MarsRover extends Rover
 {
-	
 	public MarsRover(WorldMap map, CardinalPoints direction)
 	{
 		currentDirection = direction;
 		LandThisRover(map);
+	}
+	
+	@Override
+	public void interact()
+	{
+		currentPosition.getMapTile(currentDirection).interractWithObject();
 	}
 	
 	@Override

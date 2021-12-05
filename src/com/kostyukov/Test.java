@@ -17,66 +17,69 @@ public class Test
 		ClrScr();
 		
 		WorldMap marsMap = new WorldMap(6, 6);
-		
 		Rover mRover = new MarsRover(marsMap, CardinalPoints.N);
 		
-		marsMap.PrintMap();
-		Thread.sleep(1000);
-		ClrScr();
+		ControlCenter controlCenter = new ControlCenter(marsMap,mRover);
 		
-		mRover.Move(MoveDirection.FORWARDS);
-		marsMap.PrintMap();
-		Thread.sleep(1000);
-		ClrScr();
+		controlCenter.CommandsInput("asdf.da dqws,dwe");
 		
-		mRover.Turn(TurnDirection.RIGHT);
-		marsMap.PrintMap();
-		Thread.sleep(1000);
-		ClrScr();
-		
-		mRover.Move(MoveDirection.FORWARDS);
-		marsMap.PrintMap();
-		Thread.sleep(1000);
-		ClrScr();
-		
-		mRover.Move(MoveDirection.FORWARDS);
-		marsMap.PrintMap();
-		Thread.sleep(1000);
-		ClrScr();
-		
-		mRover.Turn(TurnDirection.RIGHT);
-		marsMap.PrintMap();
-		Thread.sleep(1000);
-		ClrScr();
-		
-		mRover.Move(MoveDirection.FORWARDS);
-		marsMap.PrintMap();
-		Thread.sleep(1000);
-		ClrScr();
-		
-		mRover.Turn(TurnDirection.LEFT);
-		marsMap.PrintMap();
-		Thread.sleep(1000);
-		ClrScr();
-		
-		mRover.Move(MoveDirection.FORWARDS);
-		marsMap.PrintMap();
-		Thread.sleep(1000);
-		ClrScr();
-		
-		mRover.Turn(TurnDirection.LEFT);
-		marsMap.PrintMap();
-		Thread.sleep(1000);
-		ClrScr();
-		
-		mRover.Move(MoveDirection.BACKWARDS);
-		marsMap.PrintMap();
-		Thread.sleep(1000);
-		ClrScr();
-		
-		mRover.Move(MoveDirection.BACKWARDS);
-		marsMap.PrintMap();
-		Thread.sleep(1000);
+//		marsMap.PrintMap();
+//		Thread.sleep(1000);
+//		ClrScr();
+//
+//		mRover.Move(MoveDirection.FORWARDS);
+//		marsMap.PrintMap();
+//		Thread.sleep(1000);
+//		ClrScr();
+//
+//		mRover.Turn(TurnDirection.RIGHT);
+//		marsMap.PrintMap();
+//		Thread.sleep(1000);
+//		ClrScr();
+//
+//		mRover.Move(MoveDirection.FORWARDS);
+//		marsMap.PrintMap();
+//		Thread.sleep(1000);
+//		ClrScr();
+//
+//		mRover.Move(MoveDirection.FORWARDS);
+//		marsMap.PrintMap();
+//		Thread.sleep(1000);
+//		ClrScr();
+//
+//		mRover.Turn(TurnDirection.RIGHT);
+//		marsMap.PrintMap();
+//		Thread.sleep(1000);
+//		ClrScr();
+//
+//		mRover.Move(MoveDirection.FORWARDS);
+//		marsMap.PrintMap();
+//		Thread.sleep(1000);
+//		ClrScr();
+//
+//		mRover.Turn(TurnDirection.LEFT);
+//		marsMap.PrintMap();
+//		Thread.sleep(1000);
+//		ClrScr();
+//
+//		mRover.Move(MoveDirection.FORWARDS);
+//		marsMap.PrintMap();
+//		Thread.sleep(1000);
+//		ClrScr();
+//
+//		mRover.Turn(TurnDirection.LEFT);
+//		marsMap.PrintMap();
+//		Thread.sleep(1000);
+//		ClrScr();
+//
+//		mRover.Move(MoveDirection.BACKWARDS);
+//		marsMap.PrintMap();
+//		Thread.sleep(1000);
+//		ClrScr();
+//
+//		mRover.Move(MoveDirection.BACKWARDS);
+//		marsMap.PrintMap();
+//		Thread.sleep(1000);
 	}
 	
 	static void ClrScr()

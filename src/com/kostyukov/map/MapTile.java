@@ -18,6 +18,44 @@ public class MapTile
 		this.objectOnTheTile = objectOnTheTile;
 	}
 	
+	public void interractWithObject()
+	{
+		if (objectOnTheTile == null)
+		{
+			System.out.println("There is an empty space.");
+			return;
+		}
+		
+		if (objectOnTheTile instanceof Obstacle)
+		{
+			Obstacle.obstacleType obstacleType = ((Obstacle) objectOnTheTile).getObstacleType();
+			switch (obstacleType)
+			{
+				case HOLE ->
+						{
+							System.out.println("Sorry, WHAT to do with a hole?");
+							return;
+						}
+				case ROCK ->
+						{
+							objectOnTheTile = new Obstacle(Obstacle.obstacleType.SAMPLE);
+							System.out.println("Rock cracked successfully");
+							return;
+						}
+				case SAMPLE ->
+						{
+							objectOnTheTile = null;
+							return;
+						}
+				default -> System.out.println("Unknown command");
+			}
+		}
+		
+		{
+			objectOnTheTile = new Obstacle(Obstacle.obstacleType.SAMPLE);
+		}
+	}
+	
 	private Object objectOnTheTile;
 	
 	private final int[] coordinates = new int[2];

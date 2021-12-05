@@ -5,7 +5,8 @@ public class Obstacle
 	public enum obstacleType
 	{
 		ROCK("\u0394"),
-		HOLE("\u039F");
+		HOLE("\u039F"),
+		SAMPLE("\u2237");
 		
 		private String icon;
 		
@@ -26,6 +27,11 @@ public class Obstacle
 	public Obstacle(obstacleType obstacleType)
 	{
 		this.obstacleType = obstacleType;
+	}
+	
+	public Obstacle.obstacleType getObstacleType()
+	{
+		return obstacleType;
 	}
 	
 	@Override

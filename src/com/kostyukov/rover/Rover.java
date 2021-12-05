@@ -26,4 +26,6 @@ public abstract class Rover
 		currentPosition = map.getFirstFreeTile();
 		currentPosition.setObjectOnTheTile(this);
 	}
+	
+	public abstract void interact();
 }

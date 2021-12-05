@@ -21,7 +21,7 @@ public enum CardinalPoints
 				}
 			};
 	
-	String cardinalDirection;
+	final String cardinalDirection;
 	
 	CardinalPoints(String name)
 	{
