@@ -22,7 +22,7 @@ Now it is very primitive rouge like game\
 To enable unicode chars in console for windows - type "chcp 65001" before execute.
 
 You have to control the rover with set of commands\
-You can use "," or "." or space " " to separate commands you want, or just type all of them in one line\
+You can use "," or "." or space " " to separate commands if you want, or just type all of them in one line\
 F - move forwards\
 B - move backwards\
 R - turn right\
