@@ -10,33 +10,40 @@ Requirements
     Implement wrapping at edges. But be careful, planets are spheres. Connect the x edge to the other x edge, so (1,1) for x-1 to (5,1), but connect vertical edges towards themselves in inverted coordinates, so (1,1) for y-1 connects to (5,1).
     Implement obstacle detection before each move to a new square. If a given sequence of commands encounters an obstacle, the rover moves up to the last possible point, aborts the sequence and reports the obstacle.
 ```
-|_|_|Δ|_|_|_|
-|_|_|_|▲---------Rover facing north
+|_|_|Δ|_|_|Δ<----Rock
+|_|_|_|▲<--------Rover
 |_|Ο|_|_|_|_|
-|_|_|_|_|_|_|
+|_|_|_|_|_|∷<----Samples
 |Δ|Ο|Δ|_|_|_|
-|_|_|_|_|_|Ο-----Obstacles
+|_|_|_|_|_|Ο<----Hole
 ```
 
-To enable unicode chars in console type "chcp 65001" before execute.
+Now it is very primitive rouge like game\
+To enable unicode chars in console for windows - type "chcp 65001" before execute.
 
 You have to control the rover with set of commands\
-You can use "," or "." or space " " to separate commands, or just type all of them in one line\
+You can use "," or "." or space " " to separate commands you want, or just type all of them in one line\
 F - move forwards\
 B - move backwards\
 R - turn right\
 L - turn left\
 S - shoot the rock with a laser to crack it\
 G - gather samples after rock being cracked\
-N - travel to the new map\
-Q - quit
+N - travel to the new\next map\
+Q - quit\
+Example: "rfflfsg" - rover will turn right, move 2 tiles forward turn left, shoot the rock and gather samples.
 
-Not implemented:\
+TODO:\
+[ ] - custom map size\
 [ ] - points for gathered samples\
 [ ] - rover's charge as well as day/night charge/discharge mechanic\
+[ ] - split rock to big and small rocks\
+[ ] - scanning function to detect valuable samples in the rocks to gather them\
+[ ] - possibility to ride over small rocks and randomly be damaged\
+[ ] - fulfillment of the minimum conditions for travel to the next "planet"\
 [ ] - rover's fall into the hole\
 [ ] - gameover conditions
 
-Known issue:\
-gather and shoot command executing same function, and it's able to gather samples by shooting them
+Known issue:
+- Gather and shoot commands executing same function, and it's able to gather samples by shooting them
 
