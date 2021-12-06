@@ -3,11 +3,10 @@ package com.kostyukov;
 import com.kostyukov.map.CardinalPoints;
 import com.kostyukov.map.WorldMap;
 import com.kostyukov.rover.MarsRover;
-import com.kostyukov.rover.MoveDirection;
 import com.kostyukov.rover.Rover;
-import com.kostyukov.rover.TurnDirection;
 
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Test
 {
@@ -16,12 +15,22 @@ public class Test
 //		SetUnicodeOn();
 		ClrScr();
 		
+		Scanner scanner = new Scanner(System.in);
+		
 		WorldMap marsMap = new WorldMap(6, 6);
 		Rover mRover = new MarsRover(marsMap, CardinalPoints.N);
 		
 		ControlCenter controlCenter = new ControlCenter(marsMap,mRover);
 		
-		controlCenter.CommandsInput("asdf.da dqws,dwe");
+//		controlCenter.CommandsInput("lffrf");
+		
+		while (true)
+		{
+			String commands = scanner.nextLine();
+			if (commands.equals("q"))
+				break;
+			controlCenter.CommandsInput(commands);
+		}
 		
 //		marsMap.PrintMap();
 //		Thread.sleep(1000);

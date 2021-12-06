@@ -4,6 +4,8 @@ import com.kostyukov.map.WorldMap;
 import com.kostyukov.rover.*;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
+
 public class ControlCenter
 {
 	private Enum roverCommand;
@@ -16,6 +18,13 @@ public class ControlCenter
 		this.rover = rover;
 		
 		this.map.PrintMap();
+		Pause(3000);
+	}
+	
+	private void TravelToTheNextMap()
+	{
+		map = new WorldMap(map.getMapSizeX(), map.getMapSizeY());
+		rover.LandThisRover(map);
 	}
 	
 	private boolean DecodeCommand(@NotNull String s)
@@ -28,6 +37,7 @@ public class ControlCenter
 			case "r" -> roverCommand = TurnDirection.RIGHT;
 			case "s" -> roverCommand = CustomCommands.SHOT;
 			case "g" -> roverCommand = CustomCommands.GATHER;
+			case "n" -> TravelToTheNextMap();
 			default -> {
 				roverCommand = null;
 				return false;
@@ -44,6 +54,7 @@ public class ControlCenter
 				split("");
 		for (String s : commands)
 		{
+			ClrScr();
 			if (DecodeCommand(s))
 			{
 				if (roverCommand instanceof MoveDirection)
@@ -53,16 +64,29 @@ public class ControlCenter
 				else if (roverCommand instanceof CustomCommands)
 					rover.interact();
 			}
-			
 			map.PrintMap();
-			try
-			{
-				Thread.sleep(1000);
-			}
-			catch (InterruptedException e)
-			{
-				e.printStackTrace();
-			}
+			Pause(1000);
+		}
+	}
+	
+	private void ClrScr()
+	{
+		try
+		{
+			new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+		}
+		catch (IOException | InterruptedException ex) {}
+	}
+	
+	private void Pause(int millis)
+	{
+		try
+		{
+			Thread.sleep(millis);
+		}
+		catch (InterruptedException e)
+		{
+			e.printStackTrace();
 		}
 	}
 }

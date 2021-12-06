@@ -17,3 +17,26 @@ Requirements
 |Δ|Ο|Δ|_|_|_|
 |_|_|_|_|_|Ο-----Obstacles
 ```
+
+To enable unicode chars in console type "chcp 65001" before execute.
+
+You have to control the rover with set of commands\
+You can use "," or "." or space " " to separate commands, or just type all of them in one line\
+F - move forwards\
+B - move backwards\
+R - turn right\
+L - turn left\
+S - shoot the rock with a laser to crack it\
+G - gather samples after rock being cracked\
+N - travel to the new map\
+Q - quit
+
+Not implemented:\
+[ ] - points for gathered samples\
+[ ] - rover's charge as well as day/night charge/discharge mechanic\
+[ ] - rover's fall into the hole\
+[ ] - gameover conditions
+
+Known issue:\
+gather and shoot command executing same function, and it's able to gather samples by shooting them
+

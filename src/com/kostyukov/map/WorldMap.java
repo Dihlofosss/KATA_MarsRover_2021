@@ -128,4 +128,14 @@ public class WorldMap
 			System.out.print("|\n");
 		}
 	}
+	
+	public int getMapSizeX()
+	{
+		return tiles.length;
+	}
+	
+	public int getMapSizeY()
+	{
+		return tiles[0].length;
+	}
 }
