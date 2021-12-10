@@ -13,9 +13,14 @@ public class MarsRover extends Rover
 	}
 	
 	@Override
-	public void interact()
+	public void interact(RoverCommands command)
 	{
-		currentPosition.getMapTile(currentDirection).interactWithObject();
+		switch (command)
+		{
+			case SHOT -> currentPosition.getMapTile(currentDirection).shoot();
+			case GATHER -> currentPosition.getMapTile(currentDirection).gather();
+		}
+		
 	}
 	
 	@Override
@@ -28,14 +33,14 @@ public class MarsRover extends Rover
 		else
 			newPosition = currentPosition.getMapTile(currentDirection.nextPoint().nextPoint());
 		
-		if (newPosition.getObjectOnTheTile() != null)
+		if (newPosition.getLocalObject() != null)
 		{
 			System.out.println("You ask me to move " + moveDirection + ", but there is an obstacle. Can't move there.");
 			return;
 		}
 		
-		newPosition.setObjectOnTheTile(this);
-		currentPosition.setObjectOnTheTile(null);
+		newPosition.setLocalObject(this);
+		currentPosition.setLocalObject(null);
 		currentPosition = newPosition;
 	}
 	

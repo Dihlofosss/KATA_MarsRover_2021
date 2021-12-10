@@ -24,8 +24,8 @@ public abstract class Rover
 	public void LandThisRover(WorldMap map)
 	{
 		currentPosition = map.getFirstFreeTile();
-		currentPosition.setObjectOnTheTile(this);
+		currentPosition.setLocalObject(this);
 	}
 	
-	public abstract void interact();
+	public abstract void interact(RoverCommands interaction);
 }

@@ -18,7 +18,7 @@ public class Test
 		Scanner scanner = new Scanner(System.in);
 		System.out.print("Generating world map\nPlease enter amount of tile along the \"X\" axis: ");
 		x = scanner.nextInt();
-		System.out.print("\n And along \"Y\" axis:");
+		System.out.print("And along \"Y\" axis: ");
 		y = scanner.nextInt();
 		
 		WorldMap marsMap = new WorldMap(x, y);

@@ -8,48 +8,71 @@ public class MapTile
 	
 	private final Map<CardinalPoints, MapTile> linkedTiles = new TreeMap<>();
 	
-	public Object getObjectOnTheTile()
+	public Object getLocalObject()
 	{
-		return objectOnTheTile;
+		return localObject;
 	}
 	
-	public void setObjectOnTheTile(Object objectOnTheTile)
+	public void setLocalObject(Object localObject)
 	{
-		this.objectOnTheTile = objectOnTheTile;
+		this.localObject = localObject;
 	}
 	
-	public void interactWithObject()
+	public void shoot()
 	{
-		if (objectOnTheTile == null)
+		if (localObject == null)
 		{
 			System.out.println("There is an empty space.");
 			return;
 		}
 		
-		if (objectOnTheTile instanceof Obstacle)
+		if (localObject instanceof Obstacle)
 		{
-			Obstacle.obstacleType obstacleType = ((Obstacle) objectOnTheTile).getObstacleType();
+			Obstacle.obstacleType obstacleType = ((Obstacle) localObject).getObstacleType();
 			switch (obstacleType)
 			{
-				case HOLE -> System.out.println("Sorry, WHAT to do with a hole?");
+				case HOLE -> System.out.println("Shoot in the hole? PEW-PEW! Eat this, hole!\nLooks like that even hole ignores you");
 				case ROCK ->
 						{
-							objectOnTheTile = new Obstacle(Obstacle.obstacleType.SAMPLE);
+							localObject = new Obstacle(Obstacle.obstacleType.SAMPLE);
 							System.out.println("Rock cracked successfully");
 						}
 				case SAMPLE ->
 						{
-							System.out.println("Samples gathered, well done.");
-							objectOnTheTile = null;
+							System.out.println("O-o-o-o-ps, fossil samples are destroyed.");
+							localObject = null;
 						}
 				default -> System.out.println("Unknown obstacle type");
 			}
 		}
-		
-		System.out.println("Looks like another Rover ahead?");
 	}
 	
-	private Object objectOnTheTile;
+	public void gather()
+	{
+		if (localObject == null)
+		{
+			System.out.println("There is an empty space.");
+			return;
+		}
+		
+		if (localObject instanceof Obstacle)
+		{
+			Obstacle.obstacleType obstacleType = ((Obstacle) localObject).getObstacleType();
+			switch (obstacleType)
+			{
+				case HOLE -> System.out.println("Gather... The hole???");
+				case ROCK -> System.out.println("I would do this if this rock would be smaller. Try to crack it with a laser shot.");
+				case SAMPLE ->
+						{
+							System.out.println("Samples collected successfully.");
+							localObject = null;
+						}
+				default -> System.out.println("Unknown obstacle type");
+			}
+		}
+	}
+	
+	private Object localObject;
 	
 	private final int[] coordinates = new int[2];
 	
@@ -78,6 +101,6 @@ public class MapTile
 	@Override
 	public String toString()
 	{
-		return objectOnTheTile != null ? objectOnTheTile.toString() : "_";
+		return localObject != null ? localObject.toString() : "_";
 	}
 }

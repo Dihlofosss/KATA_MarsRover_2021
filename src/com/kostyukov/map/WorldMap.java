@@ -22,7 +22,7 @@ public class WorldMap
 						obstacleType = Obstacle.obstacleType.HOLE;
 					else
 						obstacleType = Obstacle.obstacleType.ROCK;
-					tiles[x][y].setObjectOnTheTile(new Obstacle(obstacleType));
+					tiles[x][y].setLocalObject(new Obstacle(obstacleType));
 				}
 			}
 		}
@@ -38,7 +38,7 @@ public class WorldMap
 		{
 			for (MapTile tile2 : tile1)
 			{
-				if (tile2.getObjectOnTheTile() == null)
+				if (tile2.getLocalObject() == null)
 					return tile2;
 			}
 		}

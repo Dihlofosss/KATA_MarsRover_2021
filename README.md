@@ -43,7 +43,3 @@ TODO:\
 [ ] - fulfillment of the minimum conditions for travel to the next "planet"\
 [ ] - rover's fall into the hole\
 [ ] - gameover conditions
-
-Known issue:
-- Gather and shoot commands executing same function, and it's able to gather samples by shooting them
-
