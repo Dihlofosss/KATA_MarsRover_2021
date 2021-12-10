@@ -31,29 +31,22 @@ public class MapTile
 			Obstacle.obstacleType obstacleType = ((Obstacle) objectOnTheTile).getObstacleType();
 			switch (obstacleType)
 			{
-				case HOLE ->
-						{
-							System.out.println("Sorry, WHAT to do with a hole?");
-							return;
-						}
+				case HOLE -> System.out.println("Sorry, WHAT to do with a hole?");
 				case ROCK ->
 						{
 							objectOnTheTile = new Obstacle(Obstacle.obstacleType.SAMPLE);
 							System.out.println("Rock cracked successfully");
-							return;
 						}
 				case SAMPLE ->
 						{
+							System.out.println("Samples gathered, well done.");
 							objectOnTheTile = null;
-							return;
 						}
-				default -> System.out.println("Unknown command");
+				default -> System.out.println("Unknown obstacle type");
 			}
 		}
 		
-		{
-			objectOnTheTile = new Obstacle(Obstacle.obstacleType.SAMPLE);
-		}
+		System.out.println("Looks like another Rover ahead?");
 	}
 	
 	private Object objectOnTheTile;

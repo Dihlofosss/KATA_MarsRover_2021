@@ -34,7 +34,7 @@ Q - quit\
 Example: "rfflfsg" - rover will turn right, move 2 tiles forward turn left, shoot the rock and gather samples.
 
 TODO:\
-[ ] - custom map size\
+[x] - custom map size\
 [ ] - points for gathered samples\
 [ ] - rover's charge as well as day/night charge/discharge mechanic\
 [ ] - split rock to big and small rocks\

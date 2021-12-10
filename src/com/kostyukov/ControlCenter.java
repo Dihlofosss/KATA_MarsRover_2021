@@ -27,21 +27,17 @@ public class ControlCenter
 		rover.LandThisRover(map);
 	}
 	
-	private boolean DecodeCommand(@NotNull String s)
+	private boolean DecodeAndExecuteCommand(@NotNull String s)
 	{
 		switch(s)
 		{
-			case "f" -> roverCommand = MoveDirection.FORWARDS;
-			case "b" -> roverCommand = MoveDirection.BACKWARDS;
-			case "l" -> roverCommand = TurnDirection.LEFT;
-			case "r" -> roverCommand = TurnDirection.RIGHT;
-			case "s" -> roverCommand = CustomCommands.SHOT;
-			case "g" -> roverCommand = CustomCommands.GATHER;
+			case "f" -> rover.ExecuteCommand(RoverCommands.FORWARDS);
+			case "b" -> rover.ExecuteCommand(RoverCommands.BACKWARDS);
+			case "l" -> rover.ExecuteCommand(RoverCommands.LEFT);
+			case "r" -> rover.ExecuteCommand(RoverCommands.RIGHT);
+			case "s" -> rover.ExecuteCommand(RoverCommands.SHOT);
+			case "g" -> rover.ExecuteCommand(RoverCommands.GATHER);
 			case "n" -> TravelToTheNextMap();
-			default -> {
-				roverCommand = null;
-				return false;
-			}
 		}
 		return true;
 	}
@@ -55,15 +51,7 @@ public class ControlCenter
 		for (String s : commands)
 		{
 			ClrScr();
-			if (DecodeCommand(s))
-			{
-				if (roverCommand instanceof MoveDirection)
-					rover.Move((MoveDirection)roverCommand);
-				else if (roverCommand instanceof TurnDirection)
-					rover.Turn((TurnDirection) roverCommand);
-				else if (roverCommand instanceof CustomCommands)
-					rover.interact();
-			}
+			DecodeAndExecuteCommand(s);
 			map.PrintMap();
 			Pause(1000);
 		}
@@ -75,7 +63,10 @@ public class ControlCenter
 		{
 			new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
 		}
-		catch (IOException | InterruptedException ex) {}
+		catch (IOException | InterruptedException ex)
+		{
+			ex.printStackTrace();
+		}
 	}
 	
 	private void Pause(int millis)

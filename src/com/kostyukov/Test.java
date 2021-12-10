@@ -10,19 +10,21 @@ import java.util.Scanner;
 
 public class Test
 {
-	public static void main(String[] args) throws InterruptedException
+	public static void main(String[] args)
 	{
 //		SetUnicodeOn();
 		ClrScr();
-		
+		int x,y;
 		Scanner scanner = new Scanner(System.in);
+		System.out.print("Generating world map\nPlease enter amount of tile along the \"X\" axis: ");
+		x = scanner.nextInt();
+		System.out.print("\n And along \"Y\" axis:");
+		y = scanner.nextInt();
 		
-		WorldMap marsMap = new WorldMap(6, 6);
+		WorldMap marsMap = new WorldMap(x, y);
 		Rover mRover = new MarsRover(marsMap, CardinalPoints.N);
 		
 		ControlCenter controlCenter = new ControlCenter(marsMap,mRover);
-		
-//		controlCenter.CommandsInput("lffrf");
 		
 		while (true)
 		{
@@ -31,64 +33,6 @@ public class Test
 				break;
 			controlCenter.CommandsInput(commands);
 		}
-		
-//		marsMap.PrintMap();
-//		Thread.sleep(1000);
-//		ClrScr();
-//
-//		mRover.Move(MoveDirection.FORWARDS);
-//		marsMap.PrintMap();
-//		Thread.sleep(1000);
-//		ClrScr();
-//
-//		mRover.Turn(TurnDirection.RIGHT);
-//		marsMap.PrintMap();
-//		Thread.sleep(1000);
-//		ClrScr();
-//
-//		mRover.Move(MoveDirection.FORWARDS);
-//		marsMap.PrintMap();
-//		Thread.sleep(1000);
-//		ClrScr();
-//
-//		mRover.Move(MoveDirection.FORWARDS);
-//		marsMap.PrintMap();
-//		Thread.sleep(1000);
-//		ClrScr();
-//
-//		mRover.Turn(TurnDirection.RIGHT);
-//		marsMap.PrintMap();
-//		Thread.sleep(1000);
-//		ClrScr();
-//
-//		mRover.Move(MoveDirection.FORWARDS);
-//		marsMap.PrintMap();
-//		Thread.sleep(1000);
-//		ClrScr();
-//
-//		mRover.Turn(TurnDirection.LEFT);
-//		marsMap.PrintMap();
-//		Thread.sleep(1000);
-//		ClrScr();
-//
-//		mRover.Move(MoveDirection.FORWARDS);
-//		marsMap.PrintMap();
-//		Thread.sleep(1000);
-//		ClrScr();
-//
-//		mRover.Turn(TurnDirection.LEFT);
-//		marsMap.PrintMap();
-//		Thread.sleep(1000);
-//		ClrScr();
-//
-//		mRover.Move(MoveDirection.BACKWARDS);
-//		marsMap.PrintMap();
-//		Thread.sleep(1000);
-//		ClrScr();
-//
-//		mRover.Move(MoveDirection.BACKWARDS);
-//		marsMap.PrintMap();
-//		Thread.sleep(1000);
 	}
 	
 	static void ClrScr()

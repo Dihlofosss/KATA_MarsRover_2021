@@ -19,18 +19,18 @@ public class MarsRover extends Rover
 	}
 	
 	@Override
-	public void Move(MoveDirection direction)
+	public void Move(RoverCommands moveDirection)
 	{
 		MapTile newPosition;
 		
-		if (direction == MoveDirection.FORWARDS)
+		if (moveDirection == RoverCommands.FORWARDS)
 			newPosition = currentPosition.getMapTile(currentDirection);
 		else
 			newPosition = currentPosition.getMapTile(currentDirection.nextPoint().nextPoint());
 		
 		if (newPosition.getObjectOnTheTile() != null)
 		{
-			System.out.println("You ask me to move " + direction + ", but there is an obstacle. Can't move there.");
+			System.out.println("You ask me to move " + moveDirection + ", but there is an obstacle. Can't move there.");
 			return;
 		}
 		

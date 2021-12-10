@@ -9,11 +9,11 @@ public abstract class Rover
 	MapTile currentPosition;
 	CardinalPoints currentDirection;
 	
-	public abstract void Move(MoveDirection direction);
+	public abstract void Move(RoverCommands moveDirection);
 	
-	public void Turn(TurnDirection direction)
+	public void Turn(RoverCommands turnDirection)
 	{
-		switch (direction)
+		switch (turnDirection)
 		{
 			case LEFT -> currentDirection = currentDirection.previousPoint();
 			case RIGHT -> currentDirection = currentDirection.nextPoint();
