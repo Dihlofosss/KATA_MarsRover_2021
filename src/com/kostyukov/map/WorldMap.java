@@ -4,6 +4,7 @@ import java.util.Random;
 
 public class WorldMap
 {
+	private int rocksAmount, samplesAmount;
 	private final MapTile[][] tiles;
 	public WorldMap(int sizeX, int sizeY)
 	{
@@ -17,29 +18,37 @@ public class WorldMap
 				int rnd = new Random().nextInt(20);
 				if (rnd <= 2)
 				{
-					Obstacle.obstacleType obstacleType;
+					MapItem.itemType itemType;
 					if (rnd == 1)
-						obstacleType = Obstacle.obstacleType.HOLE;
+						itemType = MapItem.itemType.HOLE;
 					else
-						obstacleType = Obstacle.obstacleType.ROCK;
-					tiles[x][y].setLocalObject(new Obstacle(obstacleType));
+					{
+						itemType = MapItem.itemType.ROCK;
+						rocksAmount++;
+					}
+					
+					tiles[x][y].setLocalObject(new MapItem(itemType));
 				}
 			}
 		}
-		
 		LinkTiles();
 //		CheckLinks();
 //		PrintMap();
 	}
 	
+	public int getRocksAmount()
+	{
+		return rocksAmount;
+	}
+	
 	public MapTile getFirstFreeTile()
 	{
-		for (MapTile[] tile1 : tiles)
+		for (MapTile[] row : tiles)
 		{
-			for (MapTile tile2 : tile1)
+			for (MapTile mapTile : row)
 			{
-				if (tile2.getLocalObject() == null)
-					return tile2;
+				if (mapTile.getLocalObject() == null)
+					return mapTile;
 			}
 		}
 		return null;
@@ -100,6 +109,7 @@ public class WorldMap
 		}
 	}
 	
+	@Deprecated
 	public void CheckLinks()
 	{
 		int sizeX = tiles.length;
@@ -119,11 +129,11 @@ public class WorldMap
 	
 	public void PrintMap()
 	{
-		for (MapTile[] tile1 : tiles)
+		for (MapTile[] row : tiles)
 		{
-			for (MapTile tile2 : tile1)
+			for (MapTile mapTile : row)
 			{
-				System.out.print("|" + tile2);
+				System.out.print("|" + mapTile);
 			}
 			System.out.print("|\n");
 		}

@@ -6,42 +6,53 @@ import com.kostyukov.map.WorldMap;
 
 public class MarsRover extends Rover
 {
-	public MarsRover(WorldMap map, CardinalPoints direction)
+	public MarsRover(WorldMap map, CardinalPoints direction, int capacitor)
 	{
+		capacitorLevel = maxCapacitorLevel = capacitor;
 		currentDirection = direction;
 		LandThisRover(map);
 	}
 	
 	@Override
-	public void interact(RoverCommands command)
+	public int interact(RoverCommands command)
 	{
+		int messageID = 0;
 		switch (command)
 		{
-			case SHOT -> currentPosition.getMapTile(currentDirection).shoot();
-			case GATHER -> currentPosition.getMapTile(currentDirection).gather();
+			case SHOT -> messageID = currentPosition.getMapTile(currentDirection).shoot();
+			case GATHER -> messageID = currentPosition.getMapTile(currentDirection).gather();
 		}
-		
+		return messageID;
 	}
 	
 	@Override
-	public void Move(RoverCommands moveDirection)
+	public int Move(RoverCommands moveDirection)
 	{
+		int messageID;
+		
 		MapTile newPosition;
 		
 		if (moveDirection == RoverCommands.FORWARDS)
+		{
 			newPosition = currentPosition.getMapTile(currentDirection);
+			messageID = 9;
+		}
 		else
+		{
 			newPosition = currentPosition.getMapTile(currentDirection.nextPoint().nextPoint());
+			messageID = 10;
+		}
 		
 		if (newPosition.getLocalObject() != null)
 		{
-			System.out.println("You ask me to move " + moveDirection + ", but there is an obstacle. Can't move there.");
-			return;
+			return 11; //return if there is obstacle on the target position
 		}
 		
 		newPosition.setLocalObject(this);
 		currentPosition.setLocalObject(null);
 		currentPosition = newPosition;
+		
+		return messageID;
 	}
 	
 	@Override
@@ -57,6 +68,6 @@ public class MarsRover extends Rover
 			case W -> roverSign = "\u25C0";
 			default -> roverSign = "Have no idea why but Rover's direction is not set";
 		}
-		return roverSign + "\u001B[0m";
+		return roverSign + "\u001B[0m"; //add green color to the rover's icon
 	}
 }

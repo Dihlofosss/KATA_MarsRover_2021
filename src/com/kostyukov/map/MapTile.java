@@ -18,58 +18,62 @@ public class MapTile
 		this.localObject = localObject;
 	}
 	
-	public void shoot()
+	public int shoot()
 	{
+		int messageID = 0;
+		
 		if (localObject == null)
 		{
-			System.out.println("There is an empty space.");
-			return;
+			return 1;
 		}
 		
-		if (localObject instanceof Obstacle)
+		if (localObject instanceof MapItem)
 		{
-			Obstacle.obstacleType obstacleType = ((Obstacle) localObject).getObstacleType();
-			switch (obstacleType)
+			MapItem.itemType itemType = ((MapItem) localObject).getObstacleType();
+			switch (itemType)
 			{
-				case HOLE -> System.out.println("Shoot in the hole? PEW-PEW! Eat this, hole!\nLooks like that even hole ignores you");
+				case HOLE -> messageID = 2;
 				case ROCK ->
 						{
-							localObject = new Obstacle(Obstacle.obstacleType.SAMPLE);
-							System.out.println("Rock cracked successfully");
+							localObject = new MapItem(MapItem.itemType.SAMPLE);
+							messageID = 3;
 						}
 				case SAMPLE ->
 						{
-							System.out.println("O-o-o-o-ps, fossil samples are destroyed.");
 							localObject = null;
+							messageID = 4;
 						}
-				default -> System.out.println("Unknown obstacle type");
+				default -> messageID = 5;
 			}
 		}
+		return messageID;
 	}
 	
-	public void gather()
+	public int gather()
 	{
+		int messageID = 0;
+		
 		if (localObject == null)
 		{
-			System.out.println("There is an empty space.");
-			return;
+			return 1;
 		}
 		
-		if (localObject instanceof Obstacle)
+		if (localObject instanceof MapItem)
 		{
-			Obstacle.obstacleType obstacleType = ((Obstacle) localObject).getObstacleType();
-			switch (obstacleType)
+			MapItem.itemType itemType = ((MapItem) localObject).getObstacleType();
+			switch (itemType)
 			{
-				case HOLE -> System.out.println("Gather... The hole???");
-				case ROCK -> System.out.println("I would do this if this rock would be smaller. Try to crack it with a laser shot.");
+				case HOLE -> messageID = 6;
+				case ROCK -> messageID = 7;
 				case SAMPLE ->
 						{
-							System.out.println("Samples collected successfully.");
+							messageID = 8;
 							localObject = null;
 						}
-				default -> System.out.println("Unknown obstacle type");
+				default -> messageID = 5;
 			}
 		}
+		return messageID;
 	}
 	
 	private Object localObject;

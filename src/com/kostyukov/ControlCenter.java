@@ -7,26 +7,28 @@ import java.io.IOException;
 
 public class ControlCenter
 {
-	private Rover rover;
+	private static int initialRocksAmount, currentRocksAmount, samplesAmount, samplesGathered;
+	private MarsRover rover;
 	private WorldMap map;
 	
-	public ControlCenter(WorldMap map, Rover rover)
+	public ControlCenter(WorldMap map, MarsRover rover)
 	{
 		this.map = map;
 		this.rover = rover;
-		
-		this.map.PrintMap();
-		Pause(3000);
+		currentRocksAmount = initialRocksAmount = map.getRocksAmount();
 	}
 	
-	private void TravelToTheNextMap()
+	private int TravelToTheNextMap()
 	{
 		map = new WorldMap(map.getMapSizeX(), map.getMapSizeY());
+		currentRocksAmount = initialRocksAmount = map.getRocksAmount();
 		rover.LandThisRover(map);
+		return 15;
 	}
 	
 	public void CommandsInput(String commandsString)
 	{
+		int messageID = -1;
 		String[] commands = commandsString.
 				toLowerCase().
 				replaceAll("[,.\\s+]","").
@@ -36,20 +38,37 @@ public class ControlCenter
 			ClrScr();
 			switch(s)
 			{
-				case "f" -> rover.Move(RoverCommands.FORWARDS);
-				case "b" -> rover.Move(RoverCommands.BACKWARDS);
-				case "l" -> rover.Turn(RoverCommands.LEFT);
-				case "r" -> rover.Turn(RoverCommands.RIGHT);
-				case "s" -> rover.interact(RoverCommands.SHOT);
-				case "g" -> rover.interact(RoverCommands.GATHER);
-				case "n" -> TravelToTheNextMap();
+				case "f" -> messageID = rover.Move(RoverCommands.FORWARDS);
+				case "b" -> messageID = rover.Move(RoverCommands.BACKWARDS);
+				case "l" -> messageID = rover.Turn(RoverCommands.LEFT);
+				case "r" -> messageID = rover.Turn(RoverCommands.RIGHT);
+				case "s" ->
+						{
+							messageID = rover.interact(RoverCommands.SHOT);
+							if (messageID == 3)
+								currentRocksAmount--;
+						}
+				case "g" -> messageID = rover.interact(RoverCommands.GATHER);
+				case "n" -> messageID = TravelToTheNextMap();
 			}
+			printStats();
 			map.PrintMap();
+			prinLastMesage(messageID);
 			Pause(1000);
 		}
 	}
 	
-	private void ClrScr()
+	public static void printStats()
+	{
+		System.out.println("Rocks: " + currentRocksAmount + "/" + initialRocksAmount + "\t");
+	}
+	
+	public static void prinLastMesage(int messageID)
+	{
+		System.out.println(SystemMessages.message.get(messageID));
+	}
+	
+	public static void ClrScr()
 	{
 		try
 		{

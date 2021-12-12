@@ -8,17 +8,30 @@ public abstract class Rover
 {
 	MapTile currentPosition;
 	CardinalPoints currentDirection;
+	int capacitorLevel, maxCapacitorLevel;
 	
-	public abstract void Move(RoverCommands moveDirection);
+	public abstract int Move(RoverCommands moveDirection);
 	
-	public void Turn(RoverCommands turnDirection)
+	public int Turn(RoverCommands turnDirection)
 	{
+		int messageID;
+		
 		switch (turnDirection)
 		{
-			case LEFT -> currentDirection = currentDirection.previousPoint();
-			case RIGHT -> currentDirection = currentDirection.nextPoint();
-			default -> System.out.println("Wrong command");
+			case LEFT ->
+					{
+						currentDirection = currentDirection.previousPoint();
+						messageID = 12;
+					}
+			case RIGHT ->
+					{
+						currentDirection = currentDirection.nextPoint();
+						messageID = 13;
+					}
+			default -> messageID = 14;
 		}
+		
+		return messageID;
 	}
 	
 	public void LandThisRover(WorldMap map)
@@ -27,5 +40,15 @@ public abstract class Rover
 		currentPosition.setLocalObject(this);
 	}
 	
-	public abstract void interact(RoverCommands interaction);
+	public abstract int interact(RoverCommands interaction);
+	
+	public int getCapacitorLevel()
+	{
+		return capacitorLevel;
+	}
+	
+	public int getMaxCapacitorLevel()
+	{
+		return maxCapacitorLevel;
+	}
 }
