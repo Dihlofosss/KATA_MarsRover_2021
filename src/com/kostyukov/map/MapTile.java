@@ -5,7 +5,6 @@ import java.util.TreeMap;
 
 public class MapTile
 {
-	
 	private final Map<CardinalPoints, MapTile> linkedTiles = new TreeMap<>();
 	
 	public Object getLocalObject()
@@ -27,15 +26,17 @@ public class MapTile
 			return 1;
 		}
 		
+		//checking for the instance in case of later implementation of additional rovers on the map
+		//like rover charger or samples transporter
 		if (localObject instanceof MapItem)
 		{
-			MapItem.itemType itemType = ((MapItem) localObject).getObstacleType();
+			MapItem.itemType itemType = ((MapItem) localObject).getItemType();
 			switch (itemType)
 			{
 				case HOLE -> messageID = 2;
 				case ROCK ->
 						{
-							localObject = new MapItem(MapItem.itemType.SAMPLE);
+							localObject = MapItem.getNewMapItem(MapItem.itemType.SAMPLE);
 							messageID = 3;
 						}
 				case SAMPLE ->
@@ -60,7 +61,7 @@ public class MapTile
 		
 		if (localObject instanceof MapItem)
 		{
-			MapItem.itemType itemType = ((MapItem) localObject).getObstacleType();
+			MapItem.itemType itemType = ((MapItem) localObject).getItemType();
 			switch (itemType)
 			{
 				case HOLE -> messageID = 6;

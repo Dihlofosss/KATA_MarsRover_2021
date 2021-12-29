@@ -26,8 +26,7 @@ public class WorldMap
 						itemType = MapItem.itemType.ROCK;
 						rocksAmount++;
 					}
-					
-					tiles[x][y].setLocalObject(new MapItem(itemType));
+					tiles[x][y].setLocalObject(MapItem.getNewMapItem(itemType));
 				}
 			}
 		}

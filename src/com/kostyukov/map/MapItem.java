@@ -22,14 +22,20 @@ public class MapItem
 		}
 	}
 	
+	public static MapItem getNewMapItem(itemType type)
+	{
+	return new MapItem(type);
+	}
+	
 	private itemType itemType;
 	
-	public MapItem(itemType itemType)
+	private
+	MapItem(itemType itemType)
 	{
 		this.itemType = itemType;
 	}
 	
-	public itemType getObstacleType()
+	public itemType getItemType()
 	{
 		return itemType;
 	}
