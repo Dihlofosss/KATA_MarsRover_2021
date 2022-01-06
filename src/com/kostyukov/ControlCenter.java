@@ -7,7 +7,8 @@ import java.io.IOException;
 
 public class ControlCenter
 {
-	private static int initialRocksAmount, currentRocksAmount, samplesAmount, samplesGathered;
+	private static int initialRocksAmount, currentRocksAmount, samplesAmount, samplesGathered, currentCapacitor, maxCapacitor;
+	public static boolean gameOver;
 	private MarsRover rover;
 	private WorldMap map;
 	
@@ -15,7 +16,10 @@ public class ControlCenter
 	{
 		this.map = map;
 		this.rover = rover;
+		gameOver = false;
 		currentRocksAmount = initialRocksAmount = map.getRocksAmount();
+		maxCapacitor = rover.getMaxCapacitorLevel();
+		getRoverCapasitor();
 	}
 	
 	private int TravelToTheNextMap()
@@ -50,7 +54,9 @@ public class ControlCenter
 						}
 				case "g" -> messageID = rover.interact(RoverCommands.GATHER);
 				case "n" -> messageID = TravelToTheNextMap();
+				case "w" -> messageID = rover.stayAndCharge();
 			}
+			getRoverCapasitor();
 			printStats();
 			map.PrintMap();
 			printLastMessage(messageID);
@@ -60,7 +66,8 @@ public class ControlCenter
 	
 	public static void printStats()
 	{
-		System.out.println("Rocks: " + currentRocksAmount + "/" + initialRocksAmount + "\tSamples gathered: " + samplesGathered + "\t");
+		System.out.print("Rocks: " + currentRocksAmount + "/" + initialRocksAmount + "\tSamples gathered: " + samplesGathered + "\t");
+		System.out.println("Capacitor: " + currentCapacitor + "/" + maxCapacitor + "\n");
 	}
 	
 	public static void printLastMessage(int messageID)
@@ -95,5 +102,10 @@ public class ControlCenter
 	public static void sampleGathered()
 	{
 		samplesGathered++;
+	}
+	
+	private void getRoverCapasitor()
+	{
+		currentCapacitor = rover.getCapacitorLevel();
 	}
 }

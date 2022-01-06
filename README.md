@@ -19,9 +19,10 @@ Requirements
 ```
 
 Now it is very primitive rouge like game\
-To enable unicode chars in console for windows - type "chcp 65001" before execute.
+To enable unicode chars in console for windowsOS - type "chcp 65001" before execute.
 
 You have to control the rover with set of commands\
+Every command consumes power\
 You can use "," or "." or space " " to separate commands if you want, or just type all of them in one line\
 F - move forwards\
 B - move backwards\
@@ -29,6 +30,7 @@ R - turn right\
 L - turn left\
 S - shoot the rock with a laser to crack it\
 G - gather samples after rock being cracked\
+W - wait and charge cells\
 N - travel to the new\next map\
 Q - quit\
 Example: "rfflfsg" - rover will turn right, move 2 tiles forward turn left, shoot the rock and gather samples.
@@ -36,10 +38,10 @@ Example: "rfflfsg" - rover will turn right, move 2 tiles forward turn left, shoo
 TODO:\
 [x] - custom map size\
 [ ] - points for gathered samples\
-[ ] - rover's charge as well as day/night charge/discharge mechanic\
+[\] - rover's charge as well as day/night charge/discharge mechanic\
 [ ] - split rock to big and small rocks\
 [ ] - scanning function to detect valuable samples in the rocks to gather them\
 [ ] - possibility to ride over small rocks and randomly be damaged\
 [ ] - fulfillment of the minimum conditions for travel to the next "planet"\
-[ ] - rover's fall into the hole\
-[ ] - gameover conditions
+[x] - rover's fall into the hole\
+[\] - gameover conditions

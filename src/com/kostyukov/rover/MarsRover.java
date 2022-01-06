@@ -1,6 +1,8 @@
 package com.kostyukov.rover;
 
+import com.kostyukov.ControlCenter;
 import com.kostyukov.map.CardinalPoints;
+import com.kostyukov.map.MapItem;
 import com.kostyukov.map.MapTile;
 import com.kostyukov.map.WorldMap;
 
@@ -19,8 +21,20 @@ public class MarsRover extends Rover
 		int messageID = 0;
 		switch (command)
 		{
-			case SHOT -> messageID = currentPosition.getMapTile(currentDirection).shoot();
-			case GATHER -> messageID = currentPosition.getMapTile(currentDirection).gather();
+			case SHOT ->
+					{
+						if (updateCapacitor(-2))
+							messageID = currentPosition.getMapTile(currentDirection).shoot();
+						else
+							messageID = 18;
+					}
+			case GATHER ->
+					{
+						if (updateCapacitor(-1))
+							messageID = currentPosition.getMapTile(currentDirection).gather();
+						else
+							messageID = 18;
+					}
 		}
 		return messageID;
 	}
@@ -45,14 +59,29 @@ public class MarsRover extends Rover
 		
 		if (newPosition.getLocalObject() != null)
 		{
-			return 11; //return if there is obstacle on the target position
+			if (((MapItem)newPosition.getLocalObject()).getItemType() == MapItem.itemType.HOLE)
+			{
+				ControlCenter.gameOver = true;
+				messageID = 16;
+			}
+			else
+				return 11; //return if there is an obstacle on the target position
 		}
+		
+		if (!updateCapacitor(-1))
+			return 18;
 		
 		newPosition.setLocalObject(this);
 		currentPosition.setLocalObject(null);
 		currentPosition = newPosition;
 		
 		return messageID;
+	}
+	
+	public int stayAndCharge()
+	{
+		updateCapacitor(1);
+		return 17;
 	}
 	
 	@Override

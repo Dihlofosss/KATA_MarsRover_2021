@@ -27,5 +27,8 @@ public class SystemMessages
 		message.put(13, "Turned right.");
 		message.put(14, "Rover turn error.");
 		message.put(15, "Landing on a new planet.");
+		message.put(16, "Rover get in the hole and stuck, and there is no way to get out.\n\u001B[31mGame is over.\033[0m");
+		message.put(17, "Rover not moving and charging power cells.");
+		message.put(18, "Insufficient power for executing command.");
 	}
 }

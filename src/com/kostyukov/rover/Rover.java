@@ -31,6 +31,7 @@ public abstract class Rover
 			default -> messageID = 14;
 		}
 		
+		updateCapacitor(-1);
 		return messageID;
 	}
 	
@@ -51,4 +52,17 @@ public abstract class Rover
 	{
 		return maxCapacitorLevel;
 	}
+	
+	boolean updateCapacitor(int value)
+	{
+		int updatedCapacitorLevel = capacitorLevel + value;
+		if (updatedCapacitorLevel < 0)
+			return false;
+		if (updatedCapacitorLevel > maxCapacitorLevel)
+			updatedCapacitorLevel = maxCapacitorLevel;
+		capacitorLevel = updatedCapacitorLevel;
+		return true;
+	}
+	
+	abstract int stayAndCharge();
 }

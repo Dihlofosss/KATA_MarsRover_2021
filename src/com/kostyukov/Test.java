@@ -21,14 +21,14 @@ public class Test
 		y = scanner.nextInt();
 		
 		WorldMap marsMap = new WorldMap(x, y);
-		MarsRover mRover = new MarsRover(marsMap, CardinalPoints.N, 30);
+		MarsRover mRover = new MarsRover(marsMap, CardinalPoints.N, 10);
 		
 		ControlCenter controlCenter = new ControlCenter(marsMap,mRover);
 		
 		ControlCenter.printStats();
 		marsMap.PrintMap();
 		
-		while (true)
+		while (!ControlCenter.gameOver)
 		{
 			System.out.println("Enter command or commands list: ");
 			String commands = scanner.nextLine();
