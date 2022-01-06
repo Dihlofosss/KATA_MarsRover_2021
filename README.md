@@ -38,7 +38,8 @@ Example: "rfflfsg" - rover will turn right, move 2 tiles forward turn left, shoo
 TODO:\
 [x] - custom map size\
 [ ] - points for gathered samples\
-[/] - rover's charge as well as day/night charge/discharge mechanic\
+[x] - rover's capacitor charge/discharge\
+[ ] - day/night/shadow charge/discharge mechanic\
 [ ] - split rock to big and small rocks\
 [ ] - scanning function to detect valuable samples in the rocks to gather them\
 [ ] - possibility to ride over small rocks and randomly be damaged\
