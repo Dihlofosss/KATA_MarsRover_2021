@@ -1,5 +1,7 @@
 package com.kostyukov.map;
 
+import com.kostyukov.ControlCenter;
+
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -70,6 +72,7 @@ public class MapTile
 						{
 							messageID = 8;
 							localObject = null;
+							ControlCenter.sampleGathered();
 						}
 				default -> messageID = 5;
 			}

@@ -53,17 +53,17 @@ public class ControlCenter
 			}
 			printStats();
 			map.PrintMap();
-			prinLastMesage(messageID);
+			printLastMessage(messageID);
 			Pause(1000);
 		}
 	}
 	
 	public static void printStats()
 	{
-		System.out.println("Rocks: " + currentRocksAmount + "/" + initialRocksAmount + "\t");
+		System.out.println("Rocks: " + currentRocksAmount + "/" + initialRocksAmount + "\tSamples gathered: " + samplesGathered + "\t");
 	}
 	
-	public static void prinLastMesage(int messageID)
+	public static void printLastMessage(int messageID)
 	{
 		System.out.println(SystemMessages.message.get(messageID));
 	}
@@ -90,5 +90,10 @@ public class ControlCenter
 		{
 			e.printStackTrace();
 		}
+	}
+	
+	public static void sampleGathered()
+	{
+		samplesGathered++;
 	}
 }

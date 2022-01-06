@@ -24,7 +24,7 @@ public class MapItem
 	
 	public static MapItem getNewMapItem(itemType type)
 	{
-	return new MapItem(type);
+		return new MapItem(type);
 	}
 	
 	private itemType itemType;

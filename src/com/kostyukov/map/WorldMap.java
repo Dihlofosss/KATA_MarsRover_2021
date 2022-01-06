@@ -15,24 +15,17 @@ public class WorldMap
 			for (int y = 0; y < sizeY; y++)
 			{
 				tiles[x][y] = new MapTile(x, y);
-				int rnd = new Random().nextInt(20);
+				int rnd = new Random().nextInt(10);
 				if (rnd <= 2)
 				{
-					MapItem.itemType itemType;
-					if (rnd == 1)
-						itemType = MapItem.itemType.HOLE;
-					else
-					{
-						itemType = MapItem.itemType.ROCK;
+					if (rnd == 0)
 						rocksAmount++;
-					}
-					tiles[x][y].setLocalObject(MapItem.getNewMapItem(itemType));
+					
+					tiles[x][y].setLocalObject(MapItem.getNewMapItem(MapItem.itemType.values()[rnd]));
 				}
 			}
 		}
-		LinkTiles();
-//		CheckLinks();
-//		PrintMap();
+		linkTiles();
 	}
 	
 	public int getRocksAmount()
@@ -53,57 +46,56 @@ public class WorldMap
 		return null;
 	}
 	
-	
-	private void LinkTiles()
+	//after generating all map tiles lets connect them
+	//south links with north links and west with east
+	private void linkTiles()
 	{
 		int sizeX = tiles.length;
 		int sizeY = tiles[0].length;
 		
-		int
-				xLinkN, yLinkN,
-				xLinkE, yLinkE,
-				xLinkS, yLinkS,
-				xLinkW, yLinkW;
+		int linkX, linkY;
 		
 		for (int x = 0; x < sizeX; x++)
 		{
 			for (int y = 0; y < sizeY; y++)
 			{
-				xLinkN = x - 1;
-				if (xLinkN < 0)
+				//get coordinates of the North map tile
+				linkX = x - 1;
+				//all if statements used to stitch map seams, N with S and E with W;
+				if (linkX < 0)
 				{
-					xLinkN = sizeX - 1;
+					linkX = sizeX - 1;
 				}
-				yLinkN = y;
+				linkY = y;
+				tiles[x][y].setTileLink(CardinalPoints.N, tiles[linkX][linkY]);
 				
-				xLinkE = x;
+				//get coordinates of the East map tile
+				linkX = x;
 				
-				yLinkE = y + 1;
-				if (yLinkE == sizeY)
+				linkY = y + 1;
+				if (linkY == sizeY)
 				{
-					yLinkE = 0;
+					linkY = 0;
 				}
+				tiles[x][y].setTileLink(CardinalPoints.E, tiles[linkX][linkY]);
 				
-				xLinkS = x + 1;
-				if (xLinkS == sizeX)
+				//get coordinates of the South map tile
+				linkX = x + 1;
+				if (linkX == sizeX)
 				{
-					xLinkS = 0;
+					linkX = 0;
 				}
+				linkY = y;
+				tiles[x][y].setTileLink(CardinalPoints.S, tiles[linkX][linkY]);
 				
-				yLinkS = y;
-				
-				xLinkW = x;
-				
-				yLinkW = y - 1;
-				if (yLinkW < 0)
+				//get coordinates of the West map tile
+				linkX = x;
+				linkY = y - 1;
+				if (linkY < 0)
 				{
-					yLinkW = sizeY - 1;
+					linkY = sizeY - 1;
 				}
-				
-				tiles[x][y].setTileLink(CardinalPoints.N, tiles[xLinkN][yLinkN]);
-				tiles[x][y].setTileLink(CardinalPoints.E, tiles[xLinkE][yLinkE]);
-				tiles[x][y].setTileLink(CardinalPoints.S, tiles[xLinkS][yLinkS]);
-				tiles[x][y].setTileLink(CardinalPoints.W, tiles[xLinkW][yLinkW]);
+				tiles[x][y].setTileLink(CardinalPoints.W, tiles[linkX][linkY]);
 			}
 		}
 	}

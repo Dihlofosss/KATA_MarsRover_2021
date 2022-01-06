@@ -39,7 +39,7 @@ public class MarsRover extends Rover
 		}
 		else
 		{
-			newPosition = currentPosition.getMapTile(currentDirection.nextPoint().nextPoint());
+			newPosition = currentPosition.getMapTile(currentDirection.oppositeDirection());
 			messageID = 10;
 		}
 		

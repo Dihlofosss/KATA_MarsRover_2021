@@ -38,6 +38,11 @@ public enum CardinalPoints
 		return values()[ordinal() - 1];
 	}
 	
+	public CardinalPoints oppositeDirection()
+	{
+		return this.nextPoint().nextPoint();
+	}
+	
 	@Override
 	public String toString()
 	{
