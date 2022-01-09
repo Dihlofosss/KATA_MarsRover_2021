@@ -8,6 +8,8 @@ import com.kostyukov.map.WorldMap;
 
 public class MarsRover extends Rover
 {
+	private int shootPowerConsumption, gatherPowerConsumption;
+	
 	public MarsRover(WorldMap map, CardinalPoints direction, int capacitor)
 	{
 		capacitorLevel = maxCapacitorLevel = capacitor;
@@ -15,26 +17,34 @@ public class MarsRover extends Rover
 		LandThisRover(map);
 	}
 	
+	/**
+	 * 4 power drain values:
+	 * move, turn, shoot and gather.
+	 * @param values
+	 */
+	@Override
+	public void setPowerConsumption(int... values)
+	{
+		super.setPowerConsumption(values);
+//		movePowerConsumption = values[0];
+//		turnPowerConsumption = values[1];
+		shootPowerConsumption = values[2];
+		gatherPowerConsumption = values[3];
+	}
+	
 	@Override
 	public int interact(RoverCommands command)
 	{
 		int messageID = 0;
+		MapTile targetTile = currentPosition.getMapTile(currentDirection);
+		
+		if (targetTile.getLocalObject() == null)
+			return 1;
+		
 		switch (command)
 		{
-			case SHOT ->
-					{
-						if (updateCapacitor(-2))
-							messageID = currentPosition.getMapTile(currentDirection).shoot();
-						else
-							messageID = 18;
-					}
-			case GATHER ->
-					{
-						if (updateCapacitor(-1))
-							messageID = currentPosition.getMapTile(currentDirection).gather();
-						else
-							messageID = 18;
-					}
+			case SHOT -> messageID = shoot(targetTile);
+			case GATHER -> messageID = gather(targetTile);
 		}
 		return messageID;
 	}
@@ -59,7 +69,7 @@ public class MarsRover extends Rover
 		
 		if (newPosition.getLocalObject() != null)
 		{
-			if (((MapItem)newPosition.getLocalObject()).getItemType() == MapItem.itemType.HOLE)
+			if (((MapItem)newPosition.getLocalObject()).getItemType() == MapItem.ItemType.HOLE)
 			{
 				ControlCenter.gameOver = true;
 				messageID = 16;
@@ -68,11 +78,11 @@ public class MarsRover extends Rover
 				return 11; //return if there is an obstacle on the target position
 		}
 		
-		if (!updateCapacitor(-1))
+		if (!updateCapacitor(-movePowerConsumption))
 			return 18;
 		
-		newPosition.setLocalObject(this);
-		currentPosition.setLocalObject(null);
+		newPosition.addLocalObject(this);
+		currentPosition.addLocalObject(null);
 		currentPosition = newPosition;
 		
 		return messageID;
@@ -80,7 +90,7 @@ public class MarsRover extends Rover
 	
 	public int stayAndCharge()
 	{
-		updateCapacitor(1);
+		updateCapacitor(2);
 		return 17;
 	}
 	
@@ -88,15 +98,90 @@ public class MarsRover extends Rover
 	public String toString()
 	{
 		String roverSign;
-		System.out.print("\u001B[32m");
+		System.out.print("\u001B[32m"); //make rove icon green
 		switch (currentDirection)
 		{
 			case N -> roverSign = "\u25B2";
 			case E -> roverSign = "\u25B6";
 			case S -> roverSign = "\u25BC";
 			case W -> roverSign = "\u25C0";
-			default -> roverSign = "Have no idea why but Rover's direction is not set";
+			default -> roverSign = "Something is broken in rover icon setup";
 		}
-		return roverSign + "\u001B[0m"; //add green color to the rover's icon
+		return roverSign + "\u001B[0m"; //switch text color back to normal
+	}
+	
+	private int shoot(MapTile targetTile)
+	{
+		int messageID = 0;
+		
+		MapItem.ItemType itemType;
+		try
+		{
+			itemType = ((MapItem)targetTile.getLocalObject()).getItemType();
+		}
+		catch (ClassCastException e)
+		{
+			e.printStackTrace();
+			return 18;
+		}
+		
+		if (updateCapacitor(-shootPowerConsumption))
+		{
+			switch (itemType)
+			{
+				case HOLE -> messageID = 2;
+				case ROCK ->
+						{
+							targetTile.addLocalObject(MapItem.getNewMapItem(MapItem.ItemType.SAMPLE));
+							messageID = 3;
+						}
+				case SAMPLE ->
+						{
+							targetTile.removeLocalObject();
+							messageID = 4;
+						}
+				default -> messageID = 5;
+			}
+		}
+		else
+			messageID = 18;
+		
+		return messageID;
+	}
+	
+	private int gather(MapTile targetTile)
+	{
+		int messageID = 0;
+		
+		MapItem.ItemType itemType;
+		try
+		{
+			itemType = ((MapItem)targetTile.getLocalObject()).getItemType();
+		}
+		catch (ClassCastException e)
+		{
+			e.printStackTrace();
+			return 18;
+		}
+		
+		if (updateCapacitor(-gatherPowerConsumption))
+		{
+			switch (itemType)
+			{
+				case HOLE -> messageID = 6;
+				case ROCK -> messageID = 7;
+				case SAMPLE ->
+						{
+							messageID = 8;
+							targetTile.removeLocalObject();
+							ControlCenter.sampleGathered();
+						}
+				default -> messageID = 5;
+			}
+		}
+		else
+			messageID = 18;
+		
+		return messageID;
 	}
 }

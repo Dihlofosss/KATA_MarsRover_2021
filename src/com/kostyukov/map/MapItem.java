@@ -2,7 +2,7 @@ package com.kostyukov.map;
 
 public class MapItem
 {
-	public enum itemType
+	public enum ItemType
 	{
 		ROCK("\u0394"),
 		HOLE("\u039F"),
@@ -10,7 +10,7 @@ public class MapItem
 		
 		private String icon;
 		
-		itemType(String icon)
+		ItemType(String icon)
 		{
 			this.icon = icon;
 		}
@@ -22,20 +22,20 @@ public class MapItem
 		}
 	}
 	
-	public static MapItem getNewMapItem(itemType type)
+	public static MapItem getNewMapItem(ItemType type)
 	{
 		return new MapItem(type);
 	}
 	
-	private itemType itemType;
+	private ItemType itemType;
 	
 	private
-	MapItem(itemType itemType)
+	MapItem(ItemType itemType)
 	{
 		this.itemType = itemType;
 	}
 	
-	public itemType getItemType()
+	public ItemType getItemType()
 	{
 		return itemType;
 	}

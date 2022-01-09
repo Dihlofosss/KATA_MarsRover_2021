@@ -14,69 +14,20 @@ public class MapTile
 		return localObject;
 	}
 	
-	public void setLocalObject(Object localObject)
+	public void addLocalObject(Object localObject)
 	{
 		this.localObject = localObject;
 	}
 	
-	public int shoot()
+	public int removeLocalObject()
 	{
 		int messageID = 0;
 		
 		if (localObject == null)
-		{
 			return 1;
-		}
+		else
+			localObject = null;
 		
-		//checking for the instance in case of later implementation of additional rovers on the map
-		//like rover charger or samples transporter
-		if (localObject instanceof MapItem)
-		{
-			MapItem.itemType itemType = ((MapItem) localObject).getItemType();
-			switch (itemType)
-			{
-				case HOLE -> messageID = 2;
-				case ROCK ->
-						{
-							localObject = MapItem.getNewMapItem(MapItem.itemType.SAMPLE);
-							messageID = 3;
-						}
-				case SAMPLE ->
-						{
-							localObject = null;
-							messageID = 4;
-						}
-				default -> messageID = 5;
-			}
-		}
-		return messageID;
-	}
-	
-	public int gather()
-	{
-		int messageID = 0;
-		
-		if (localObject == null)
-		{
-			return 1;
-		}
-		
-		if (localObject instanceof MapItem)
-		{
-			MapItem.itemType itemType = ((MapItem) localObject).getItemType();
-			switch (itemType)
-			{
-				case HOLE -> messageID = 6;
-				case ROCK -> messageID = 7;
-				case SAMPLE ->
-						{
-							messageID = 8;
-							localObject = null;
-							ControlCenter.sampleGathered();
-						}
-				default -> messageID = 5;
-			}
-		}
 		return messageID;
 	}
 	
@@ -99,11 +50,6 @@ public class MapTile
 	public MapTile getMapTile(CardinalPoints point)
 	{
 		return linkedTiles.get(point);
-	}
-	
-	public String getCoordinates()
-	{
-		return "x (" + coordinates[0] + ") y (" + coordinates[1] + ")";
 	}
 	
 	@Override

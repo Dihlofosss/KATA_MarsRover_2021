@@ -22,6 +22,7 @@ public class Test
 		
 		WorldMap marsMap = new WorldMap(x, y);
 		MarsRover mRover = new MarsRover(marsMap, CardinalPoints.N, 10);
+		mRover.setPowerConsumption(3,1,5,1);//power consumption - move, turn, shoot, gather
 		
 		ControlCenter controlCenter = new ControlCenter(marsMap,mRover);
 		
@@ -30,7 +31,7 @@ public class Test
 		
 		while (!ControlCenter.gameOver)
 		{
-			System.out.println("Enter command or commands list: ");
+			System.out.println("Enter command or list of commands: ");
 			String commands = scanner.nextLine();
 			if (commands.equals("q"))
 				break;

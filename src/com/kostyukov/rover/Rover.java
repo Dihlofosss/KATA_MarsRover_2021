@@ -9,6 +9,7 @@ public abstract class Rover
 	MapTile currentPosition;
 	CardinalPoints currentDirection;
 	int capacitorLevel, maxCapacitorLevel;
+	int movePowerConsumption, turnPowerConsumption;
 	
 	public abstract int Move(RoverCommands moveDirection);
 	
@@ -28,17 +29,20 @@ public abstract class Rover
 						currentDirection = currentDirection.nextPoint();
 						messageID = 13;
 					}
-			default -> messageID = 14;
+			default ->
+					{
+						return 14;
+					}
 		}
 		
-		updateCapacitor(-1);
+		updateCapacitor(-turnPowerConsumption);
 		return messageID;
 	}
 	
 	public void LandThisRover(WorldMap map)
 	{
 		currentPosition = map.getFirstFreeTile();
-		currentPosition.setLocalObject(this);
+		currentPosition.addLocalObject(this);
 	}
 	
 	public abstract int interact(RoverCommands interaction);
@@ -56,8 +60,10 @@ public abstract class Rover
 	boolean updateCapacitor(int value)
 	{
 		int updatedCapacitorLevel = capacitorLevel + value;
+		//limit discharge level
 		if (updatedCapacitorLevel < 0)
 			return false;
+		//limit charge level
 		if (updatedCapacitorLevel > maxCapacitorLevel)
 			updatedCapacitorLevel = maxCapacitorLevel;
 		capacitorLevel = updatedCapacitorLevel;
@@ -65,4 +71,10 @@ public abstract class Rover
 	}
 	
 	abstract int stayAndCharge();
+	
+	void setPowerConsumption(int... values)
+	{
+		movePowerConsumption = values[0];
+		turnPowerConsumption = values[1];
+	}
 }

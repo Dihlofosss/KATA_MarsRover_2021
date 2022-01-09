@@ -13,7 +13,7 @@ public class SystemMessages
 		message.put(-1, "");
 		message.put(0, "messageID initialization error");
 		message.put(1, "There is an empty space.");
-		message.put(2, "Shoot in the hole? PEW-PEW! Eat this, hole!\nLooks like that even hole ignores you.");
+		message.put(2, "Shoot in the hole? PEW-PEW! Eat this, hole!\nLooks like that even a hole ignores you.");
 		message.put(3, "Rock cracked successfully.");
 		message.put(4, "O-o-o-o-ps, fossil samples are destroyed.");
 		message.put(5, "Unknown obstacle type.");
@@ -27,8 +27,8 @@ public class SystemMessages
 		message.put(13, "Turned right.");
 		message.put(14, "Rover turn error.");
 		message.put(15, "Landing on a new planet.");
-		message.put(16, "Rover get in the hole and stuck, and there is no way to get out.\n\u001B[31mGame is over.\033[0m");
-		message.put(17, "Rover not moving and charging power cells.");
+		message.put(16, "Rover got into a hole and stuck, and there is no way to get out.\n\u001B[31mGame is over.\033[0m");
+		message.put(17, "Rover recharging power cells with a solar panels.");
 		message.put(18, "Insufficient power for executing command.");
 	}
 }

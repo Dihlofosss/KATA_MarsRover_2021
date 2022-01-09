@@ -19,7 +19,7 @@ public class ControlCenter
 		gameOver = false;
 		currentRocksAmount = initialRocksAmount = map.getRocksAmount();
 		maxCapacitor = rover.getMaxCapacitorLevel();
-		getRoverCapasitor();
+		getRoverCapacitor();
 	}
 	
 	private int TravelToTheNextMap()
@@ -56,7 +56,7 @@ public class ControlCenter
 				case "n" -> messageID = TravelToTheNextMap();
 				case "w" -> messageID = rover.stayAndCharge();
 			}
-			getRoverCapasitor();
+			getRoverCapacitor();
 			printStats();
 			map.PrintMap();
 			printLastMessage(messageID);
@@ -104,7 +104,7 @@ public class ControlCenter
 		samplesGathered++;
 	}
 	
-	private void getRoverCapasitor()
+	private void getRoverCapacitor()
 	{
 		currentCapacitor = rover.getCapacitorLevel();
 	}

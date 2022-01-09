@@ -21,7 +21,7 @@ public class WorldMap
 					if (rnd == 0)
 						rocksAmount++;
 					
-					tiles[x][y].setLocalObject(MapItem.getNewMapItem(MapItem.itemType.values()[rnd]));
+					tiles[x][y].addLocalObject(MapItem.getNewMapItem(MapItem.ItemType.values()[rnd]));
 				}
 			}
 		}
@@ -96,24 +96,6 @@ public class WorldMap
 					linkY = sizeY - 1;
 				}
 				tiles[x][y].setTileLink(CardinalPoints.W, tiles[linkX][linkY]);
-			}
-		}
-	}
-	
-	@Deprecated
-	public void CheckLinks()
-	{
-		int sizeX = tiles.length;
-		int sizeY = tiles[0].length;
-		
-		for (int x = 0; x < sizeX; x++)
-		{
-			for (int y = 0; y < sizeY; y++)
-			{
-				System.out.println("Current tile x (" + x + ") y (" + y + ") North tile - " + tiles[x][y].getMapTile(CardinalPoints.N).getCoordinates());
-				System.out.println("Current tile x (" + x + ") y (" + y + ") East tile - " + tiles[x][y].getMapTile(CardinalPoints.E).getCoordinates());
-				System.out.println("Current tile x (" + x + ") y (" + y + ") South tile - " + tiles[x][y].getMapTile(CardinalPoints.S).getCoordinates());
-				System.out.println("Current tile x (" + x + ") y (" + y + ") West tile - " + tiles[x][y].getMapTile(CardinalPoints.W).getCoordinates());
 			}
 		}
 	}
