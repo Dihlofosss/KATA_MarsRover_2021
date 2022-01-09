@@ -26,8 +26,6 @@ public class MarsRover extends Rover
 	public void setPowerConsumption(int... values)
 	{
 		super.setPowerConsumption(values);
-//		movePowerConsumption = values[0];
-//		turnPowerConsumption = values[1];
 		shootPowerConsumption = values[2];
 		gatherPowerConsumption = values[3];
 	}
@@ -112,7 +110,7 @@ public class MarsRover extends Rover
 	
 	private int shoot(MapTile targetTile)
 	{
-		int messageID = 0;
+		int messageID;
 		
 		MapItem.ItemType itemType;
 		try
@@ -151,7 +149,7 @@ public class MarsRover extends Rover
 	
 	private int gather(MapTile targetTile)
 	{
-		int messageID = 0;
+		int messageID;
 		
 		MapItem.ItemType itemType;
 		try

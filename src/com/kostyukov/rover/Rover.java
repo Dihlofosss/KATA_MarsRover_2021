@@ -17,25 +17,29 @@ public abstract class Rover
 	{
 		int messageID;
 		
-		switch (turnDirection)
+		if (updateCapacitor(-turnPowerConsumption))
 		{
-			case LEFT ->
-					{
-						currentDirection = currentDirection.previousPoint();
-						messageID = 12;
-					}
-			case RIGHT ->
-					{
-						currentDirection = currentDirection.nextPoint();
-						messageID = 13;
-					}
-			default ->
-					{
-						return 14;
-					}
+			switch (turnDirection)
+			{
+				case LEFT ->
+						{
+							currentDirection = currentDirection.previousPoint();
+							messageID = 12;
+						}
+				case RIGHT ->
+						{
+							currentDirection = currentDirection.nextPoint();
+							messageID = 13;
+						}
+				default ->
+						{
+							return 14;
+						}
+			}
 		}
+		else
+			messageID = 18;
 		
-		updateCapacitor(-turnPowerConsumption);
 		return messageID;
 	}
 	
